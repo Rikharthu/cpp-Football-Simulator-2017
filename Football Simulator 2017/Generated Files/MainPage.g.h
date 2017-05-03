@@ -13,6 +13,7 @@ namespace Windows {
             namespace Controls {
                 ref class MediaElement;
                 ref class Button;
+                ref class CheckBox;
                 ref class TextBlock;
             }
         }
@@ -60,7 +61,9 @@ namespace Football_Simulator_2017
         private: ::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ canvasAnimated;
         private: ::Windows::UI::Xaml::Controls::Button^ startStopBtn;
         private: ::Windows::UI::Xaml::Controls::Primitives::ToggleButton^ startStopToggleBtn;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ EnablePlayer2Team1_CheckBox;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ playersEnabledLabel2;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ EnablePlayer2Team2_CheckBox;
     };
 }
 

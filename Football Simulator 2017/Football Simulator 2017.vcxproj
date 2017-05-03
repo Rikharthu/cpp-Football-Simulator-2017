@@ -128,19 +128,44 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAsManaged>false</CompileAsManaged>
     </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Link>
+      <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Link>
+      <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AssReferee.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="Field.h" />
+    <ClInclude Include="FieldNet.h" />
+    <ClInclude Include="Forward.h" />
+    <ClInclude Include="FullBack.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Girl.h" />
+    <ClInclude Include="GoalKeeper.h" />
+    <ClInclude Include="HalfBack.h" />
+    <ClInclude Include="Human.h" />
+    <ClInclude Include="MainView.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -148,6 +173,9 @@
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Referee.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -178,9 +206,18 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="AssReferee.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Field.cpp" />
+    <ClCompile Include="FieldNet.cpp" />
+    <ClCompile Include="Forward.cpp" />
+    <ClCompile Include="FullBack.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Girl.cpp" />
+    <ClCompile Include="GoalKeeper.cpp" />
+    <ClCompile Include="HalfBack.cpp" />
+    <ClCompile Include="Human.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>
@@ -192,6 +229,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Referee.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

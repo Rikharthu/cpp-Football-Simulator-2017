@@ -3,8 +3,6 @@
 #include <cstdlib>
 #include <math.h>
 
-#define PI 3.1415926535897932385
-
 using namespace Windows::Foundation;
 
 int random(int low, int high)
@@ -69,7 +67,7 @@ void angellipse(int SOMETHING, int xc, int yc, int r, double a1, double a2, doub
 		++i;
 	}
 
-	// TODO
+	//TODO implement
 
 	delete poly;
 }

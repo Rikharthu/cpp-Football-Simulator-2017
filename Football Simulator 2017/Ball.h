@@ -1,6 +1,7 @@
 #pragma once
+#include "Drawable.h"
 
-class Ball
+class Ball :public Drawable
 {
 private:
 	int x;
@@ -17,7 +18,7 @@ public:
 	int getSpeed() { return speed; }
 	void setDir(double d) { dir = d; }
 	double getDir() { return dir; }
-	void draw();
+	virtual void draw();
 	void move();
 	void moveTo(int xTo, int yTo) { x = xTo; y = yTo; }
 	void getCoord(int& xb, int& yb) { xb = x; yb = y; }

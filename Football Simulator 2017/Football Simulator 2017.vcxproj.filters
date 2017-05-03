@@ -14,6 +14,12 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{70bfbb49-d7ff-4a99-9159-a18e158e82de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\Humans">
+      <UniqueIdentifier>{81667688-de18-45a3-9040-687fad1aa379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Humans">
+      <UniqueIdentifier>{67a3aa39-03c0-445b-814c-991d9e83a3c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -28,10 +34,43 @@
     <ClCompile Include="Field.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Utils.cpp">
+    <ClCompile Include="Ball.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
+    <ClCompile Include="Human.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="AssReferee.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Referee.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="FullBack.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Forward.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalKeeper.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Girl.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="HalfBack.cpp">
+      <Filter>Sources\Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldNet.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawable.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,6 +88,45 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainView.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="AssReferee.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Referee.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="FullBack.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Forward.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalKeeper.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Girl.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="HalfBack.h">
+      <Filter>Headers\Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldNet.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

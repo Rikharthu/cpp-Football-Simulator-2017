@@ -9,6 +9,8 @@
 #include "Field.h"
 #include "Utils.h"
 #include "Ball.h"
+#include "Drawable.h"
+#include "Human.h"
 
 using namespace Football_Simulator_2017;
 
@@ -35,6 +37,7 @@ CanvasCommandList^ field_cl;
 
 extern GameManager * gameManager;
 GameManager * gameManager;
+IRandomAccessStreamWithContentType ^ audioStream;
 
 MediaElement ^ element;
 
@@ -43,36 +46,69 @@ MainPage::MainPage()
 	InitializeComponent();
 }
 
+void Football_Simulator_2017::MainPage::playSound(Sound sound)
+{
+	String^sound_file_name;
+	switch (sound) {
+	case Kick1:
+		sound_file_name = "Kick1.wav";
+		break;
+	case Kick2:
+		sound_file_name = "Kick2.wav";
+		break;
+	case Kick3:
+		sound_file_name = "Kick3.wav";
+		break;
+	case Mencheer:
+		sound_file_name = "mencheer.wav";
+		break;
+	case SuccessTada:
+		sound_file_name = "successtada.wav";
+		break;
+	case Whistle:
+		sound_file_name = "whistle.wav";
+		break;
+	default:
+		return;
+	}
+	sound_file_name = "ms-appx:///Assets/" + sound_file_name;
+	Uri ^fileUri = ref new Uri(sound_file_name);
 
-void Football_Simulator_2017::MainPage::playSound() {
-	auto fileUri = ref new Uri("ms-appx:///Assets/successtada.wav");
-	auto file = StorageFile::GetFileFromApplicationUriAsync(fileUri);
-	auto fileTask = concurrency::create_task(file);
-	fileTask.then([](StorageFile ^ sfile) {
-		int x = 4;
-		auto stream = sfile->OpenReadAsync();
-		auto streamTask = concurrency::create_task(stream);
-		streamTask.then([](IRandomAccessStreamWithContentType ^ sstream) {
+	auto getSoundFileOperation = StorageFile::GetFileFromApplicationUriAsync(fileUri);
+	// convert IAsyncOperation to task
+	auto getSoundFileTask = concurrency::create_task(getSoundFileOperation);
+	// write a lambda function that will execute when task finishes
+	getSoundFileTask.then([](StorageFile ^ sfile) {
+		auto openFileReadOperation = sfile->OpenReadAsync();
+		auto openFileReadTask = concurrency::create_task(openFileReadOperation);
+		openFileReadTask.then([](IRandomAccessStreamWithContentType ^ sstream) {
 			/*element->SetSource(sstream, "audio/x-ms-wma");
 			element->Play();*/
 			CoreApplication::MainView->CoreWindow->Dispatcher->RunAsync(
 				Core::CoreDispatcherPriority::Normal,
 				ref new Windows::UI::Core::DispatchedHandler([sstream]()
 			{
+				// lazy init
+				/*if (audioStream == nullptr) {
+				audioStream = sstream;
+				}*/
 				element->SetSource(sstream, "audio/x-ms-wma");
 				element->Play();
 			}));
 		});
-
 	});
 }
 
 void Football_Simulator_2017::MainPage::canvas_DrawAnimated(Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedDrawEventArgs^ args)
 {
-	Ball ball;
-	ball.moveTo(random(600), random(600));
-	ball.draw();
-	// static content (field)
+	gameManager->ball->moveTo(random(600), random(600));
+	int x, y;
+	gameManager->ball->getCoord(x, y);
+	if (gameManager->field->isGoalLeft(x, y)) {
+		playSound(Sound::SuccessTada);
+	}
+	gameManager->render();
+	// static content (field is pre-drawn on this command list)
 	args->DrawingSession->DrawImage(gameManager->field_cl);
 	// dynamic content (ball, players, etc)
 	args->DrawingSession->DrawImage(gameManager->render_target);
@@ -95,8 +131,7 @@ void Football_Simulator_2017::MainPage::canvas_CreateResources(Microsoft::Graphi
 	gameManager->init();
 
 	gameManager->field->draw();
-	gameManager->field->drawLines();
-
+	//gameManager->field->drawLines();
 }
 
 // for testing
@@ -146,16 +181,42 @@ void Football_Simulator_2017::MainPage::startStopToggleBtn_Click(Platform::Objec
 		startStopToggleBtn->Content = "Start";
 	}
 
-	playSound();
+	//playSound();
+
+	//TODO debug
+	//gameManager->render();
+
+	playSound(Sound::Kick1);
 }
+
+void Football_Simulator_2017::MainPage::mediaPlayer_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	element = static_cast<MediaElement^>(sender);
+}
+
+void MainView::playSound(Sound sound) {
+	//playSound(sound);
+}
+
+//TODO make use of only one listener through the use of regex (PlayerXTeamY)
 
 void Football_Simulator_2017::MainPage::playersEnabledLabel2_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e)
 {
 	// TODO change both 2nd player's checkboxes state and call according events if needed
+	/*EnablePlayer2Team1_CheckBox->IsChecked = !EnablePlayer2Team1_CheckBox->IsChecked;
+	EnablePlayer2Team2_CheckBox->IsChecked = !EnablePlayer2Team2_CheckBox->IsChecked;*/
 }
 
-
-void Football_Simulator_2017::MainPage::mediaPlayer_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+///<summary>
+/// Retrieves checkox tag, which is int32 type "XY", where X -is team number and Y- player number
+///</summary>
+void Football_Simulator_2017::MainPage::EnablePlayerXTeamY_CheckBox_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	element = safe_cast<MediaElement^>(sender);
+	CheckBox ^ chkbx = static_cast<CheckBox^>(sender);
+	auto chkbx_tag = chkbx->Tag;
+	int player_id = safe_cast<int32>(chkbx_tag);
+	int team_number = player_id / 10;
+	int player_number = player_id % 10;
+
+	//TODO send player to workbench/release
 }

@@ -1,5 +1,8 @@
 #pragma once
 
+
+#define PI 3.1415926535897932385
+
 ///<summary>
 /// generates an integer in range [low; high]
 ///</summary>

@@ -1,4 +1,5 @@
 #pragma once
+#include "FieldNet.h"
 
 using namespace Windows::Foundation;
 using namespace Microsoft::Graphics::Canvas;
@@ -41,4 +42,5 @@ public:
 	bool isGoalRight(int x, int y);
 	bool insideLeftGoalArea(int x, int y);
 	bool insideRightGoalArea(int x, int y);
+	friend void FieldNet::draw();
 };

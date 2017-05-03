@@ -40,6 +40,12 @@ template<typename T>
 }
 
 template<typename TDeclaringType, typename TValue>
+::Platform::Object^ GetValueTypeMember_TargetElapsedTime(::Platform::Object^ instance)
+{
+    return ref new ::Platform::Box<TValue>(safe_cast<TDeclaringType^>(instance)->TargetElapsedTime);
+}
+
+template<typename TDeclaringType, typename TValue>
 ::Platform::Object^ GetValueTypeMember_Dpi(::Platform::Object^ instance)
 {
     return ref new ::Platform::Box<TValue>(safe_cast<TDeclaringType^>(instance)->Dpi);
@@ -49,12 +55,6 @@ template<typename TDeclaringType, typename TValue>
 ::Platform::Object^ GetValueTypeMember_UseSharedDevice(::Platform::Object^ instance)
 {
     return ref new ::Platform::Box<TValue>(safe_cast<TDeclaringType^>(instance)->UseSharedDevice);
-}
-
-template<typename TDeclaringType, typename TValue>
-::Platform::Object^ GetValueTypeMember_TargetElapsedTime(::Platform::Object^ instance)
-{
-    return ref new ::Platform::Box<TValue>(safe_cast<TDeclaringType^>(instance)->TargetElapsedTime);
 }
 
 template<typename TDeclaringType, typename TValue>
@@ -118,15 +118,15 @@ template<typename TDeclaringType>
 }
 
 template<typename TDeclaringType, typename TValue>
-void SetValueTypeMember_UseSharedDevice(::Platform::Object^ instance, ::Platform::Object^ value)
-{
-    safe_cast<TDeclaringType^>(instance)->UseSharedDevice = safe_cast<::Platform::IBox<TValue>^>(value)->Value;
-}
-
-template<typename TDeclaringType, typename TValue>
 void SetValueTypeMember_TargetElapsedTime(::Platform::Object^ instance, ::Platform::Object^ value)
 {
     safe_cast<TDeclaringType^>(instance)->TargetElapsedTime = safe_cast<::Platform::IBox<TValue>^>(value)->Value;
+}
+
+template<typename TDeclaringType, typename TValue>
+void SetValueTypeMember_UseSharedDevice(::Platform::Object^ instance, ::Platform::Object^ value)
+{
+    safe_cast<TDeclaringType^>(instance)->UseSharedDevice = safe_cast<::Platform::IBox<TValue>^>(value)->Value;
 }
 
 template<typename TDeclaringType, typename TValue>
@@ -339,32 +339,32 @@ struct MemberInfo
 
 MemberInfo MemberInfos[] = 
 {
-    //   0 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.Device
+    //   0 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.TargetElapsedTime
+    L"TargetElapsedTime",
+    &GetValueTypeMember_TargetElapsedTime<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl, ::Windows::Foundation::TimeSpan>,
+    &SetValueTypeMember_TargetElapsedTime<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl, ::Windows::Foundation::TimeSpan>,
+    6, // Windows.Foundation.TimeSpan
+    -1,
+    false, false, false,
+    //   1 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.Device
     L"Device",
     &GetReferenceTypeMember_Device<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl>,
     nullptr,
     10, // Microsoft.Graphics.Canvas.CanvasDevice
     -1,
     true,  false, false,
-    //   1 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.Dpi
+    //   2 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.Dpi
     L"Dpi",
     &GetValueTypeMember_Dpi<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl, ::default::float32>,
     nullptr,
     1, // Single
     -1,
     true,  false, false,
-    //   2 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.UseSharedDevice
+    //   3 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.UseSharedDevice
     L"UseSharedDevice",
     &GetValueTypeMember_UseSharedDevice<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl, ::Platform::Boolean>,
     &SetValueTypeMember_UseSharedDevice<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl, ::Platform::Boolean>,
     2, // Boolean
-    -1,
-    false, false, false,
-    //   3 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.TargetElapsedTime
-    L"TargetElapsedTime",
-    &GetValueTypeMember_TargetElapsedTime<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl, ::Windows::Foundation::TimeSpan>,
-    &SetValueTypeMember_TargetElapsedTime<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl, ::Windows::Foundation::TimeSpan>,
-    6, // Windows.Foundation.TimeSpan
     -1,
     false, false, false,
     //   4 - Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl.Paused

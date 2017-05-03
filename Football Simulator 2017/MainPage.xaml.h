@@ -6,6 +6,9 @@
 #pragma once
 
 #include "MainPage.g.h"
+#include "GameManager.h"
+#include "Sound.h"
+#include "MainView.h"
 
 namespace Football_Simulator_2017
 {
@@ -30,7 +33,10 @@ namespace Football_Simulator_2017
 		void startStopToggleBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void playersEnabledLabel2_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
 
-		void playSound();
+		void playSound(Sound sound);
 		void mediaPlayer_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
+		MainView view;
+		void EnablePlayerXTeamY_CheckBox_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

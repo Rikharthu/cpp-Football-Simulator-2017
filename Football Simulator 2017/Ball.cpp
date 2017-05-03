@@ -18,10 +18,10 @@ Ball::Ball()
 
 void Ball::draw()
 {
-	CanvasDrawingSession ^ clds = gameManager->render_target->CreateDrawingSession();
-	clds->FillCircle(x, y, r, Colors::White);
-	clds->DrawCircle(x, y, r, Colors::Black);
-	delete clds;
+	CanvasDrawingSession ^ session = gameManager->render_target->CreateDrawingSession();
+	session->FillCircle(x, y, r, Colors::White);
+	session->DrawCircle(x, y, r, Colors::Black);
+	delete session;
 }
 
 void Ball::move()
