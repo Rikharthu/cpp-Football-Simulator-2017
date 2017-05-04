@@ -14,7 +14,7 @@ void Girl::move()
 {
 	int center_x, center_y;
 	gameManager->field->getCentre(center_x, center_y);
-	if (speed > 0 && y < 100) speed = 3; else speed = -7;
+	if (speed > 0 && y < 200) speed = 3; else speed = -7;
 	y += speed;
 	if (y < 5) {
 		gameManager->gameState = sRestartGame;

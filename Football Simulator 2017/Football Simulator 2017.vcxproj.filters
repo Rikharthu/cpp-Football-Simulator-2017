@@ -73,6 +73,12 @@
     <ClCompile Include="Drawable.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Spotlight.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -127,6 +133,15 @@
       <Filter>Headers\Humans</Filter>
     </ClInclude>
     <ClInclude Include="FieldNet.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Spotlight.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUIInterface.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

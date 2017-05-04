@@ -14,7 +14,7 @@ void HalfBack::kick()
 {
 	int ball_x, ball_y, center_x, center_y, direction_x, direction_y;
 	double ball_direction, dirdisp = PI / 8;
-	int kickSpeed = 20;
+	int kickSpeed = 35;
 	gameManager->ball->getCoord(ball_x, ball_y);
 	gameManager->field->getCentre(center_x, center_y);
 	direction_y = ball_y;
@@ -33,6 +33,6 @@ void HalfBack::kick()
 	ball_direction = disperse(ball_direction, dirdisp);
 	gameManager->ball->setDir(ball_direction);
 	gameManager->ball->setSpeed(disperse(kickSpeed, kickSpeed / 2));
-	//TODO Sound enum
-	sound = 1;
+
+	gameManager->sound_queue.push(Kick1);
 }

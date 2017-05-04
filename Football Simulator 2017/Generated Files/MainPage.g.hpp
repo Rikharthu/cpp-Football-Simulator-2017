@@ -29,12 +29,19 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
     {
         case 1:
             {
+                ::Windows::UI::Xaml::Controls::Page^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Page^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Page^>(element1))->Unloaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Page_Unloaded);
+            }
+            break;
+        case 2:
+            {
                 this->mediaPlayer = safe_cast<::Windows::UI::Xaml::Controls::MediaElement^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::MediaElement^>(this->mediaPlayer))->Loaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::mediaPlayer_Loaded);
             }
             break;
-        case 2:
+        case 3:
             {
                 this->canvasAnimated = safe_cast<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^>(__target);
                 (safe_cast<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^>(this->canvasAnimated))->Draw += ref new ::Windows::Foundation::TypedEventHandler<::Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^, ::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedDrawEventArgs^>(this, (void (::Football_Simulator_2017::MainPage::*)
@@ -45,54 +52,47 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
                     (::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^, ::Microsoft::Graphics::Canvas::UI::CanvasCreateResourcesEventArgs^))&MainPage::canvas_CreateResources);
                 (safe_cast<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^>(this->canvasAnimated))->PointerPressed += ref new ::Windows::UI::Xaml::Input::PointerEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Input::PointerRoutedEventArgs^))&MainPage::canvas_PointerPressed);
-            }
-            break;
-        case 3:
-            {
-                ::Windows::UI::Xaml::Controls::Slider^ element3 = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Slider^>(element3))->ValueChanged += ref new ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^))&MainPage::speedSlider_ValueChanged);
+                (safe_cast<::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^>(this->canvasAnimated))->Update += ref new ::Windows::Foundation::TypedEventHandler<::Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^, ::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedUpdateEventArgs^>(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^, ::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedUpdateEventArgs^))&MainPage::canvasAnimated_Update);
             }
             break;
         case 4:
-            {
-                this->startStopBtn = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->startStopBtn))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::startStopBtn_Click);
-            }
-            break;
-        case 5:
             {
                 this->startStopToggleBtn = safe_cast<::Windows::UI::Xaml::Controls::Primitives::ToggleButton^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ToggleButton^>(this->startStopToggleBtn))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::startStopToggleBtn_Click);
             }
             break;
+        case 5:
+            {
+                ::Windows::UI::Xaml::Controls::ComboBox^ element5 = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(element5))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&MainPage::ComboBox_SelectionChanged);
+            }
+            break;
         case 6:
             {
-                this->EnablePlayer2Team1_CheckBox = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->EnablePlayer2Team1_CheckBox))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
+                this->___No_Name_ = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
             }
             break;
         case 7:
             {
-                ::Windows::UI::Xaml::Controls::CheckBox^ element7 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element7))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
+                this->debug_enabled_chkbx = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->debug_enabled_chkbx))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::debug_enabled_chkbx_Click);
             }
             break;
         case 8:
             {
-                ::Windows::UI::Xaml::Controls::CheckBox^ element8 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element8))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
+                this->girls_enabled_chkbx = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->girls_enabled_chkbx))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::girls_enabled_chkbx_Click);
             }
             break;
         case 9:
             {
-                ::Windows::UI::Xaml::Controls::CheckBox^ element9 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element9))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                this->EnablePlayer2Team1_CheckBox = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->EnablePlayer2Team1_CheckBox))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
             }
             break;
@@ -105,15 +105,15 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
             break;
         case 11:
             {
-                this->playersEnabledLabel2 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(this->playersEnabledLabel2))->Tapped += ref new ::Windows::UI::Xaml::Input::TappedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::Input::TappedRoutedEventArgs^))&MainPage::playersEnabledLabel2_Tapped);
+                ::Windows::UI::Xaml::Controls::CheckBox^ element11 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element11))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
             }
             break;
         case 12:
             {
-                this->EnablePlayer2Team2_CheckBox = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->EnablePlayer2Team2_CheckBox))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                ::Windows::UI::Xaml::Controls::CheckBox^ element12 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element12))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
             }
             break;
@@ -126,15 +126,15 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
             break;
         case 14:
             {
-                ::Windows::UI::Xaml::Controls::CheckBox^ element14 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element14))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
+                this->playersEnabledLabel2 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(this->playersEnabledLabel2))->Tapped += ref new ::Windows::UI::Xaml::Input::TappedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Input::TappedRoutedEventArgs^))&MainPage::playersEnabledLabel2_Tapped);
             }
             break;
         case 15:
             {
-                ::Windows::UI::Xaml::Controls::CheckBox^ element15 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element15))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                this->EnablePlayer2Team2_CheckBox = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->EnablePlayer2Team2_CheckBox))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
             }
             break;
@@ -143,6 +143,47 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
                 ::Windows::UI::Xaml::Controls::CheckBox^ element16 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element16))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
+            }
+            break;
+        case 17:
+            {
+                ::Windows::UI::Xaml::Controls::CheckBox^ element17 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element17))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
+            }
+            break;
+        case 18:
+            {
+                ::Windows::UI::Xaml::Controls::CheckBox^ element18 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element18))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
+            }
+            break;
+        case 19:
+            {
+                ::Windows::UI::Xaml::Controls::CheckBox^ element19 = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(element19))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::EnablePlayerXTeamY_CheckBox_Click);
+            }
+            break;
+        case 20:
+            {
+                this->Team1Score_TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 21:
+            {
+                this->Team2Score_TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 22:
+            {
+                this->Team1Energy_ProgressBar = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(__target);
+            }
+            break;
+        case 23:
+            {
+                this->Team2Energy_ProgressBar = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(__target);
             }
             break;
     }

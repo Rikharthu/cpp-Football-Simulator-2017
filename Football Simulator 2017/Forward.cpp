@@ -4,9 +4,9 @@
 
 Forward::Forward(int t, int n) :Player(t, n)
 {
-	speed = 10;
+	speed = 12;
 	area = *(gameManager->field->fieldRect);
-	tForward;
+	type=tForward;
 }
 
 /*

@@ -70,7 +70,7 @@ void FullBack::kick()
 	double ball_direction = direction(ball_x, ball_y, center_x, center_y);
 	ball_direction = disperse(ball_direction, PI / 8);
 	gameManager->ball->setDir(ball_direction);
-	gameManager->ball->setSpeed(30);
-	//TODO replace with Sound enum value
-	sound = 1;
+	gameManager->ball->setSpeed(40);
+
+	gameManager->sound_queue.push(Kick1);
 }

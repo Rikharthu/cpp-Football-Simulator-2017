@@ -23,4 +23,6 @@ public:
 	void moveTo(int xTo, int yTo) { x = xTo; y = yTo; }
 	void getCoord(int& xb, int& yb) { xb = x; yb = y; }
 	bool isCollide(int x, int y, int r);
+
+	int immune_counter = 0;
 };

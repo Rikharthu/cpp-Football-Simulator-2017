@@ -129,6 +129,7 @@
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CompileAsManaged>false</CompileAsManaged>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -161,10 +162,12 @@
     <ClInclude Include="Forward.h" />
     <ClInclude Include="FullBack.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameUIInterface.h" />
     <ClInclude Include="Girl.h" />
     <ClInclude Include="GoalKeeper.h" />
     <ClInclude Include="HalfBack.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="Lights.h" />
     <ClInclude Include="MainView.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
@@ -176,6 +179,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Referee.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Spotlight.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +222,7 @@
     <ClCompile Include="GoalKeeper.cpp" />
     <ClCompile Include="HalfBack.cpp" />
     <ClCompile Include="Human.cpp" />
+    <ClCompile Include="Lights.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>
@@ -231,6 +236,7 @@
     </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Referee.cpp" />
+    <ClCompile Include="Spotlight.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

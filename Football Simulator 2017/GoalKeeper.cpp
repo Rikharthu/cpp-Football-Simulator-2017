@@ -52,20 +52,24 @@ void GoalKeeper::move()
 
 void GoalKeeper::kick()
 {
-	int bal_x, ball_y, center_x, center_y;
-	gameManager->ball->getCoord(bal_x, ball_y);
-	gameManager->field->getCentre(center_x, center_y);
+	if (gameManager->ball->immune_counter<= 0) {
+		int bal_x, ball_y, center_x, center_y;
+		gameManager->ball->getCoord(bal_x, ball_y);
+		gameManager->field->getCentre(center_x, center_y);
 
-	if (teamNo == 1) {
-		center_x = gameManager->field->fieldRect->Right;
+		if (teamNo == 1) {
+			center_x = gameManager->field->fieldRect->Right;
+		}
+		else {
+			center_x = gameManager->field->fieldRect->Left;
+		}
+		double ball_direction = direction(bal_x, ball_y, center_x, center_y);
+		ball_direction = disperse(ball_direction, PI / 4);
+		gameManager->ball->setDir(ball_direction);
+		gameManager->ball->setSpeed(40);
+		gameManager->ball->immune_counter = 20;
+
+		//TODO some lagg happens with this sound, even though during debugging it is confirmed to execute only once
+		gameManager->sound_queue.push(Kick3);
 	}
-	else {
-		center_x = gameManager->field->fieldRect->Left;
-	}
-	double ball_direction = direction(bal_x, ball_y, center_x, center_y);
-	ball_direction = disperse(ball_direction, PI / 4);
-	gameManager->ball->setDir(ball_direction);
-	gameManager->ball->setSpeed(40);
-	//TODO use Sound enum
-	sound = 3;
 }

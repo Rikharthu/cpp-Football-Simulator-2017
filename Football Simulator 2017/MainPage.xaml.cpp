@@ -11,6 +11,9 @@
 #include "Ball.h"
 #include "Drawable.h"
 #include "Human.h"
+#include <locale>
+#include <codecvt>
+#include <string>
 
 using namespace Football_Simulator_2017;
 
@@ -38,8 +41,10 @@ CanvasCommandList^ field_cl;
 extern GameManager * gameManager;
 GameManager * gameManager;
 IRandomAccessStreamWithContentType ^ audioStream;
-
+bool isDebugEnabled = false;
+bool isStarted = false;
 MediaElement ^ element;
+long long original_duration;
 
 MainPage::MainPage()
 {
@@ -82,16 +87,10 @@ void Football_Simulator_2017::MainPage::playSound(Sound sound)
 		auto openFileReadOperation = sfile->OpenReadAsync();
 		auto openFileReadTask = concurrency::create_task(openFileReadOperation);
 		openFileReadTask.then([](IRandomAccessStreamWithContentType ^ sstream) {
-			/*element->SetSource(sstream, "audio/x-ms-wma");
-			element->Play();*/
 			CoreApplication::MainView->CoreWindow->Dispatcher->RunAsync(
 				Core::CoreDispatcherPriority::Normal,
 				ref new Windows::UI::Core::DispatchedHandler([sstream]()
 			{
-				// lazy init
-				/*if (audioStream == nullptr) {
-				audioStream = sstream;
-				}*/
 				element->SetSource(sstream, "audio/x-ms-wma");
 				element->Play();
 			}));
@@ -99,21 +98,22 @@ void Football_Simulator_2017::MainPage::playSound(Sound sound)
 	});
 }
 
+// DRAWING
 void Football_Simulator_2017::MainPage::canvas_DrawAnimated(Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedDrawEventArgs^ args)
 {
-	gameManager->ball->moveTo(random(600), random(600));
+	//gameManager->ball->moveTo(random(600), random(600));
 	int x, y;
 	gameManager->ball->getCoord(x, y);
 	if (gameManager->field->isGoalLeft(x, y)) {
 		playSound(Sound::SuccessTada);
 	}
+	//gameManager->moveAll();
 	gameManager->render();
+	syncUI();
 	// static content (field is pre-drawn on this command list)
 	args->DrawingSession->DrawImage(gameManager->field_cl);
 	// dynamic content (ball, players, etc)
 	args->DrawingSession->DrawImage(gameManager->render_target);
-	// TODO test
-	args->DrawingSession->DrawText("asdasd", random(0, 500), random(0, 500), Colors::Red);
 }
 
 
@@ -128,6 +128,7 @@ void Football_Simulator_2017::MainPage::canvas_CreateResources(Microsoft::Graphi
 	field_cl = ref new CanvasCommandList(sender);
 	gameManager = new GameManager(field_cl);
 	gameManager->canvas = safe_cast<CanvasAnimatedControl^>(sender);
+	original_duration = gameManager->canvas->TargetElapsedTime.Duration;
 	gameManager->init();
 
 	gameManager->field->draw();
@@ -149,17 +150,11 @@ void Football_Simulator_2017::MainPage::canvas_PointerPressed(Platform::Object^ 
 	sprintf(str, "x:%d, y:%d\nisInside=%d\nisOutLeft=%d\nisOutRight=%d\nisGoalLeft=%d\nisGoalRight=%d\n",
 		x, y, isInside, isOutLeft, isOutRight, isGoalLeft, isGoalRight);
 	OutputDebugStringA(str);
+	if (isDebugEnabled) {
+		gameManager->ball->moveTo(x, y);
+	}
 #endif // _DEBUG
 }
-
-void Football_Simulator_2017::MainPage::speedSlider_ValueChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^ e)
-{
-	Slider ^ speedSlider = safe_cast<Slider^>(sender);
-	double newValue = speedSlider->Value;
-	// TODO use this value
-	double speedMultiplier = newValue / 100;
-}
-
 
 void Football_Simulator_2017::MainPage::startStopBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
@@ -169,33 +164,26 @@ void Football_Simulator_2017::MainPage::startStopBtn_Click(Platform::Object^ sen
 
 void Football_Simulator_2017::MainPage::startStopToggleBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	// TODO use game manager
-	isStarted = !isStarted;
-
-	if (isStarted) {
-		// start
-		startStopToggleBtn->Content = "Stop";
+	if (!isStarted) {
+		// first start
+		isStarted = true;
+		gameManager->startGame();
 	}
 	else {
-		// stop
-		startStopToggleBtn->Content = "Start";
+		if (gameManager->gameState == sStop) {
+			gameManager->gameState = sRunning;
+			startStopToggleBtn->Content = "Stop";
+		}
+		else {
+			gameManager->gameState = sStop;
+			startStopToggleBtn->Content = "Start";
+		}
 	}
-
-	//playSound();
-
-	//TODO debug
-	//gameManager->render();
-
-	playSound(Sound::Kick1);
 }
 
 void Football_Simulator_2017::MainPage::mediaPlayer_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	element = static_cast<MediaElement^>(sender);
-}
-
-void MainView::playSound(Sound sound) {
-	//playSound(sound);
 }
 
 //TODO make use of only one listener through the use of regex (PlayerXTeamY)
@@ -219,4 +207,137 @@ void Football_Simulator_2017::MainPage::EnablePlayerXTeamY_CheckBox_Click(Platfo
 	int player_number = player_id % 10;
 
 	//TODO send player to workbench/release
+	Player * selectedPlayer = team_number == 1 ?
+		gameManager->team1.at(player_number - 1)
+		: gameManager->team2.at(player_number - 1);
+
+	selectedPlayer->inGame = !selectedPlayer->inGame;
+}
+
+
+void Football_Simulator_2017::MainPage::debug_btn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	gameManager->moveAll();
+	//log_chat_message("Referee", "Player 1 disqualified");
+}
+
+
+void Football_Simulator_2017::MainPage::debug_enabled_chkbx_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	isDebugEnabled = debug_enabled_chkbx->IsChecked->Value;
+}
+
+void Football_Simulator_2017::MainPage::log_chat_message(string tag, string message)
+{
+	/*std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+	std::wstring intermediateForm = converter.from_bytes(tag+": "+message);
+	Platform::String^ retVal = ref new Platform::String(intermediateForm.c_str());
+	log_TextBlock->Text = log_TextBlock->Text+retVal +"\n";*/
+}
+
+
+void Football_Simulator_2017::MainPage::Page_Unloaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	canvasAnimated->RemoveFromVisualTree();
+	delete gameManager;
+	delete canvasAnimated;
+}
+
+// uses polling approach
+void Football_Simulator_2017::MainPage::syncUI()
+{
+	CoreApplication::MainView->CoreWindow->Dispatcher->RunAsync(
+		Core::CoreDispatcherPriority::Normal,
+		ref new Windows::UI::Core::DispatchedHandler([this]()
+	{
+		gameManager->calculateEnergy();
+		// sync ui with gamemanager's parameters such as energy, score and etc
+		Team1Energy_ProgressBar->Value = gameManager->team1_energy;
+		Team2Energy_ProgressBar->Value = gameManager->team2_energy;
+
+		Team1Score_TextBlock->Text = gameManager->team1_score.ToString();
+		Team2Score_TextBlock->Text = gameManager->team2_score.ToString();
+
+		// play enqueued sounds
+		while (!gameManager->sound_queue.empty()) {
+			try {
+				playSound(gameManager->sound_queue.front());
+				element->IsLooping = true;
+				gameManager->sound_queue.pop();
+			}
+			catch (...) {
+
+			}
+		}
+	}));
+}
+
+// we use canvas as tick source
+void Football_Simulator_2017::MainPage::canvasAnimated_Update(Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedUpdateEventArgs^ args)
+{
+	if (gameManager->gameState != sStop) {
+		gameManager->tick();
+	}
+}
+
+void Football_Simulator_2017::MainPage::ComboBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
+{
+	if (canvasAnimated != nullptr) {
+		ComboBox ^ cmb = safe_cast<ComboBox^>(sender);
+		int selected_index = cmb->SelectedIndex;
+		double multiplier = 1;
+		switch (selected_index) {
+		case 0:
+			//25%
+			multiplier = 0.25f;
+			break;
+		case 1:
+			//50%	
+			multiplier = 0.25f;
+			break;
+		case 2:
+			// 75%
+			multiplier = 0.75f;
+			break;
+		case 3:
+			// 100%
+			multiplier = 1;
+			break;
+		case 4:
+			// 125%
+			multiplier = 1.25f;
+			break;
+		case 5:
+			// 150%
+			multiplier = 1.5f;
+			break;
+		case 6:
+			// 200%
+			multiplier = 2;
+			break;
+		case 7:
+			// 300%
+			multiplier = 3;
+			break;
+		case 8:
+			// 500%
+			multiplier = 5;
+			break;
+		case 9:
+			// 1000%
+			multiplier = 10;
+			break;
+		}
+
+		TimeSpan canvas_upd_timespan = canvasAnimated->TargetElapsedTime;
+		canvas_upd_timespan.Duration = original_duration / multiplier;
+		canvasAnimated->TargetElapsedTime = canvas_upd_timespan;
+	}
+}
+
+
+void Football_Simulator_2017::MainPage::girls_enabled_chkbx_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	bool isEnabled = girls_enabled_chkbx->IsChecked->Value;
+	gameManager->isGirlsAllowed = isEnabled;
 }

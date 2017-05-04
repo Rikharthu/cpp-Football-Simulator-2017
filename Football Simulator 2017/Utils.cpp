@@ -34,7 +34,7 @@ double direction(int x1, int y1, int x2, int y2)
 double disperse(double direction, double delta)
 {
 	int k = rand() % 2 ? -1 : 1;
-	double p = rand() % 1001 / 1000;
+	double p = (double)(rand() % 1001 )/ 1000;
 	return direction + k*p*delta;
 }
 

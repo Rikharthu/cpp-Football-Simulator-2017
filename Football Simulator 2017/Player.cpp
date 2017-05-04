@@ -54,16 +54,21 @@ void Player::move()
 		xd = xb; yd = yb;
 		// player is on his team's side of the field
 		bool ownSide = (teamNo == 1 && x < xc) || (teamNo == 2 && x > xc);
-		energy = energy > 0 ? --energy : 0;
-		//TODO check it and adjust
-		speed = 5 + rand() % (energy / 1000);
+		energy -= 5;
+		energy = energy > 0 ? energy : 0;
+		//TODO since energy is not implemented - reuse it
+		speed = 5 + rand() % ((energy / 500) + 1);
+		speed = 5 + rand() % 5;
 
 		dir = direction(x, y, xd, yd);
-		dir = disperse(dir, PI / 12);
+		//TODO control precision here
+		dir = disperse(dir, PI / 6);
 
 		//TODO check how it works
 		x += speed*cos(dir);
 		y -= speed*sin(dir);
+
+		avoidCollision();
 
 		// if in reach of ball kick
 		if (distance(x, y, xb, yb) < close)kick();
@@ -72,48 +77,103 @@ void Player::move()
 
 void Player::kick()
 {
-	int xb, yb, xc, yc, xd, yd, speedb;
-	gameManager->ball->getCoord(xb, yb);
-	gameManager->field->getCentre(xc, yc);
-	yd = yc;
-	// depending on team, choose where to kick the ball
-	if (teamNo == 1)  xd = gameManager->field->fieldRect->Right;
-	else            xd = gameManager->field->fieldRect->Left;
+	if (gameManager->ball->immune_counter <= 0) {
+		gameManager->ball->immune_counter = 5;
 
-	speedb = disperse(20, 10);
-	//TODO refactor to reuse
-	bool ownSide = (teamNo == 1 && x < xc) || (teamNo == 2 && x > xc);
+		int xb, yb, xc, yc, xd, yd, speedb;
+		gameManager->ball->getCoord(xb, yb);
+		gameManager->field->getCentre(xc, yc);
+		yd = yc;
+		// depending on team, choose where to kick the ball
+		if (teamNo == 1)  xd = gameManager->field->fieldRect->Right;
+		else            xd = gameManager->field->fieldRect->Left;
 
-	Point p = partner();
-	if (p.X >= 0) { // is partner?
-		int speedp = sqrt(2 * distance(x, y, p.X, p.Y) + 0.25) - 0.5;
+		speedb = disperse(30, 10);
+		//TODO refactor to reuse
+		bool ownSide = (teamNo == 1 && x < xc) || (teamNo == 2 && x > xc);
 
-		if ((teamNo == 1 && p.X > x + 10) || (teamNo == 2 && p.X < x - 10)) {
-			xd = p.X; yd = p.Y;
-			speedb = speedp + disperse(10, 5);
+		Point p = partner();
+		if (p.X >= 0) { // is partner?
+			int speedp = sqrt(2 * distance(x, y, p.X, p.Y) + 0.25) - 0.5;
+
+			// if partner is closer to the enemy's gates then дать ему пас
+			if ((teamNo == 1 && p.X > x + 10) || (teamNo == 2 && p.X < x - 10)) {
+				xd = p.X; yd = p.Y;
+				speedb = speedp + disperse(10, 5);
+			}
+
+			if (gameManager->gameState == sFirstKick) {
+				xd = p.X;
+				yd = p.Y;
+				speedb = speedp + disperse(10, 3);
+				gameManager->gameState = sRunning;
+			}
 		}
 
-		if (gameManager->gameState == sFirstKick) {
-			xd = p.X;
-			yd = p.Y;
-			speedb = speedp + disperse(10, 3);
-			gameManager->gameState = sRunning;
-		}
+		double ball_direction;
+		ball_direction = direction(xb, yb, xd, yd);
+		ball_direction = disperse(ball_direction, PI / 24);
+		//TODO adjust direction and speed if needed
+		gameManager->ball->setDir(ball_direction);
+		gameManager->ball->setSpeed(speedb*2);
+
+		gameManager->sound_queue.push(Kick2);
 	}
-
-	double ball_direction;
-	ball_direction = direction(xb, yb, xd, yd);
-	ball_direction = disperse(ball_direction, PI / 24);
-	//TODO adjust direction and speed if needed
-	gameManager->ball->setDir(ball_direction);
-	gameManager->ball->setSpeed(speedb);
-	//TODO Kick sound = Kick2.wav, better use Sound enum
-	sound = 2;
 }
 
 void Player::avoidCollision()
 {
 	//TODO implement later
+	//int limit = r;
+	//int pos_count = gameManager->team1.size() + gameManager->team2.size();
+	//Point * occupied_positions = new Point[pos_count];
+
+	//int j = 0;
+	//for (Player * player : gameManager->team1) {
+	//	if (player != this && player->inGame) {
+	//		occupied_positions[j].X = player->x;
+	//		occupied_positions[j].Y = player->y;
+	//	}
+	//	// such a difference
+	//	j++;
+	//}
+	//// repeat for team2
+	//for (Player * player : gameManager->team2) {
+	//	if (player != this && player->inGame) {
+	//		occupied_positions[j].X = player->x;
+	//		occupied_positions[j].Y = player->y;
+	//	}
+	//	j++;
+	//}
+	//occupied_positions[j].X = this->x;
+	//occupied_positions[j].Y = this->y;
+
+	//int attempts = 10000;
+	//bool is_too_close;
+	//int xa = x, ya = y, speeda = speed;
+	//double dira = dir;
+	//int dist;
+	//pos_count = j + 1;
+	//do {
+	//	for (int i = 0; i < pos_count; i++) {
+	//		// current player is too close to other players
+	//		is_too_close = distance(xa, ya, occupied_positions[i].X, occupied_positions[i].Y) < limit;
+	//		if (is_too_close) {
+	//			--attempts;
+	//			dist = distance(xa, ya, occupied_positions[i].X, occupied_positions[i].Y);
+	//			speeda = speeda + dist - limit;//disperse(speed, lim);
+	//			dira = disperse(dir, PI / 12);
+	//			xa = x + speeda*cos(dira);
+	//			ya = y - speeda*sin(dira);
+	//			break;
+	//		}
+	//	}
+	//} while (is_too_close && attempts > 0);
+	//x = xa;
+	//y = ya;
+	//speed = speeda;
+	//dir = dira;
+	//delete occupied_positions;
 }
 
 void Player::moveToBench()
