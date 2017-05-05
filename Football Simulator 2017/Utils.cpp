@@ -2,8 +2,14 @@
 #include "Utils.h"
 #include <cstdlib>
 #include <math.h>
+#include "GameManager.h"
 
 using namespace Windows::Foundation;
+using namespace Windows::UI;
+using namespace Windows::Foundation::Numerics;
+using namespace Microsoft::Graphics::Canvas;
+using namespace Microsoft::Graphics::Canvas::Geometry;
+using namespace Microsoft::Graphics::Canvas::Brushes;
 
 int random(int low, int high)
 {
@@ -38,15 +44,17 @@ double disperse(double direction, double delta)
 	return direction + k*p*delta;
 }
 
-// WAT IS HAPPENING HERE!?
-void angellipse(int SOMETHING, int xc, int yc, int r, double a1, double a2, double ang, double ear) {
+//TODO move to lights.cpp, no need for it to be in utils anymore
+void angellipse(CanvasDrawingSession^ clds, int xc, int yc, int r, double a1, double a2, double ang, double ear)
+{
 	float angr, cosang, sinang, r1, r2, x1, y1, da, a;
 	int x, y;
 	double Spic_AR = 1;
 	if (a1>a2) { a = a1; a1 = a2; a2 = a; }
 	da = PI / 200; //0.0698128;
 	int np = (a2 - a1) / da + 2;
-	Point *poly = new Point[np];
+	//Point *poly = new Point[np];
+	Platform::Array<float2>^ poly = ref  new Platform::Array<float2>(np);
 	r1 = r; r2 = r*ear;
 
 	ang = -ang;
@@ -55,19 +63,22 @@ void angellipse(int SOMETHING, int xc, int yc, int r, double a1, double a2, doub
 	x1 = r1*cos(a1); y1 = r2*sin(a1);
 	x = x1*cosang - y1*sinang + xc;
 	y = (x1*sinang + y1*cosang)*Spic_AR + yc;
-	poly[0].X = x;
-	poly[0].Y = y;
+	poly[0].x = x;
+	poly[0].y = y;
 	int i = 1;
-	for (a = a1 + da; a <= a2; a += da) {
+	for (a = a1 + da + 1; a < a2; a += da) {
 		x1 = r1*cos(a); y1 = r2*sin(a);
 		x = x1*cosang - y1*sinang + xc;
 		y = (x1*sinang + y1*cosang)*Spic_AR + yc;
-		poly[i].X = x;
-		poly[i].Y = y;
+		poly[i].x = x;
+		poly[i].y = y;
 		++i;
 	}
 
-	//TODO implement
+	//TODO persist it 
+	CanvasSolidColorBrush^ brush = ref new CanvasSolidColorBrush(gameManager->canvas, Colors::LightGreen);
+	brush->Opacity = 0.7f;
+	clds->FillGeometry(CanvasGeometry::CreatePolygon(clds, poly), brush);
 
 	delete poly;
 }

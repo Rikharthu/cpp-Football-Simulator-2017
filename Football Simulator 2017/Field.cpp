@@ -41,6 +41,11 @@ void Field::draw()
 	session->DrawCircle(x_c, y_c, h / 2 * FIELD_CENTER_RATIO, Colors::White, markupWidth);
 	session->FillCircle(x_c, y_c, 2 * markupWidth, Colors::White);
 	session->DrawLine(x_c, borderWidth, x_c, h + borderWidth, Colors::White, markupWidth);
+
+	// goalkeeper's borders
+	session->DrawRectangle(fieldRect->Left, y_c - goalAreaH / 2, goalAreaW, goalAreaH, Colors::White);
+	session->DrawRectangle(fieldRect->Right - goalAreaW, y_c - goalAreaH / 2, goalAreaW, goalAreaH, Colors::White);
+
 	delete session;
 }
 

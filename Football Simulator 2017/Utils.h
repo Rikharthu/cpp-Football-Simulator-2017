@@ -1,6 +1,6 @@
 #pragma once
 
-
+using namespace Microsoft::Graphics::Canvas;
 #define PI 3.1415926535897932385
 
 ///<summary>
@@ -28,8 +28,5 @@ double direction(int x1, int y1, int x2, int y2);
 ///</summary>
 double disperse(double direction, double delta);
 
-///<summary>
-/// does something cool too
-///</summary>
-//void angellipse(TCanvas *aCanvas, int xc, int yc, int r, double a1, double a2, double ang, double ear);
+void angellipse(CanvasDrawingSession^ clds, int xc, int yc, int r, double a1, double a2, double ang, double ear);
 

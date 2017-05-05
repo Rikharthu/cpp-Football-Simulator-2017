@@ -1,5 +1,6 @@
 #pragma once
 #include "Drawable.h"
+using namespace Windows::Foundation::Numerics;
 
 class Lights :public Drawable {
 private:
@@ -15,6 +16,7 @@ private:
 	double tiltSpeed;
 
 public:
+	Platform::Array<float2>^ poly;
 	bool on;
 	Lights(int xp, int yp, int towerH,
 		double foc,

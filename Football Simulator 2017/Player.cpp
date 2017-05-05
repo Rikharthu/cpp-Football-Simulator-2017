@@ -162,9 +162,9 @@ void Player::avoidCollision()
 	//			--attempts;
 	//			dist = distance(xa, ya, occupied_positions[i].X, occupied_positions[i].Y);
 	//			speeda = speeda + dist - limit;//disperse(speed, lim);
-	//			dira = disperse(dir, PI / 12);
-	//			xa = x + speeda*cos(dira);
-	//			ya = y - speeda*sin(dira);
+	//			dira = disperse(dir,PI / 12);
+	//			xa = x + (double)speeda*cos(dira);
+	//			ya = y - (double)speeda*sin(dira);
 	//			break;
 	//		}
 	//	}
