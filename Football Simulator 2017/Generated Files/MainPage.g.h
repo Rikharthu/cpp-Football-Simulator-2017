@@ -64,6 +64,7 @@ namespace Football_Simulator_2017
         private: ::Windows::UI::Xaml::Controls::Grid^ ___No_Name_;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ debug_enabled_chkbx;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ girls_enabled_chkbx;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ sound_enabled_chkbx;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ EnablePlayer2Team1_CheckBox;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ playersEnabledLabel2;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ EnablePlayer2Team2_CheckBox;

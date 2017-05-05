@@ -258,11 +258,14 @@ void Football_Simulator_2017::MainPage::syncUI()
 		Team1Score_TextBlock->Text = gameManager->team1_score.ToString();
 		Team2Score_TextBlock->Text = gameManager->team2_score.ToString();
 
+		element->IsLooping = gameManager->isLoopSound;
+
 		// play enqueued sounds
 		while (!gameManager->sound_queue.empty()) {
 			try {
-				playSound(gameManager->sound_queue.front());
-				element->IsLooping = true;
+				if (sound_enabled_chkbx->IsChecked->Value) {
+					playSound(gameManager->sound_queue.front());
+				}
 				gameManager->sound_queue.pop();
 			}
 			catch (...) {

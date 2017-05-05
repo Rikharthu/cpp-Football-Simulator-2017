@@ -229,6 +229,13 @@
                           HorizontalContentAlignment="Left"
                           VerticalContentAlignment="Stretch"
                           Click="girls_enabled_chkbx_Click" />
+                <CheckBox x:Name="sound_enabled_chkbx"
+                          Content="Sound Enabled"
+                          IsChecked="true"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Stretch" />
             </StackPanel>          
         </StackPanel>
         <canvas:CanvasAnimatedControl Name="canvasAnimated"

@@ -179,9 +179,6 @@
     <Page Include="MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\..\..\C++\Football Simulator 2017\Football_G6_Full_version_CLEAN\successtada.wav">
-      <Filter>Assets</Filter>
-    </Media>
     <Media Include="Assets\Kick1.wav">
       <Filter>Assets</Filter>
     </Media>

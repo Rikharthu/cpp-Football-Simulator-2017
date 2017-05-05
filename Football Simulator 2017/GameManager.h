@@ -54,6 +54,7 @@ public:
 	int team1_score = 0;
 	int team2_score = 0;
 	Sound sound;
+	bool isLoopSound = false;
 	// sounds sequences that should be played
 	queue<Sound> sound_queue;
 

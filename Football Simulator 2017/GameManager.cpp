@@ -326,6 +326,7 @@ void GameManager::tick()
 			gameState = sPause;
 			//TODO implement
 			lights[0]->on = lights[1]->on = true;
+			isLoopSound = true;
 			//	sound("successtada.wav", SND_ASYNC | SND_LOOP);
 			sound_queue.push(SuccessTada);
 		}
@@ -334,6 +335,7 @@ void GameManager::tick()
 		}
 		return;
 	case sRestartGame:
+		isLoopSound = false;
 		//::Sleep(1000);
 		//for (int i = 0; i<5; ++i) girl[i]->moveTo(xc - 2 * 6 + i * 6, 4);
 		lights[0]->on = lights[1]->on = false;
