@@ -361,3 +361,9 @@ void Football_Simulator_2017::MainPage::girls_enabled_chkbx_Click(Platform::Obje
 	bool isEnabled = girls_enabled_chkbx->IsChecked->Value;
 	gameManager->isGirlsAllowed = isEnabled;
 }
+
+
+void Football_Simulator_2017::MainPage::Comment_TextBlock_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+
+}

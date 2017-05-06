@@ -1,9 +1,8 @@
 #pragma once
 #include "Human.h"
 
-///<summary>
-/// Referee that moves along X-axis
-///</summary>
+
+// Referee that moves only along Y axis
 class AssReferee : public Human
 {
 public:

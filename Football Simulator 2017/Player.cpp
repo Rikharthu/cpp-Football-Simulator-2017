@@ -9,17 +9,13 @@ Player::Player(int t, int n)
 	No = n;
 	color = t == 1 ? Colors::Blue : Colors::Red;
 	speed = 0;
-	sound = 0;
-	/*font = new TFont;
-	font->Name = "Courier New";
-	font->Height = 2 * r + 1;*/
 	inGame = true;
 }
 
 void Player::draw()
 {
 	Human::draw();
-	gameManager->render_target_session->DrawText(No.ToString(), x, y - r, Colors::Black);
+	gameManager->render_target_session->DrawText(No.ToString(), x, y + r, Colors::Black);
 }
 
 void Player::move()
@@ -36,17 +32,14 @@ void Player::move()
 		xd = xb; yd = yb;
 		// player is on his team's side of the field
 		bool ownSide = (teamNo == 1 && x < xc) || (teamNo == 2 && x > xc);
-		energy -= 5;
+		energy -= ENERGY_CONSUMPTION;
 		energy = energy > 0 ? energy : 0;
-		//TODO since energy is not implemented - reuse it
+		//!++ TODO Configure speed here
 		speed = 5 + rand() % ((energy / 500) + 1);
-		speed = 5 + rand() % 5;
 
 		dir = direction(x, y, xd, yd);
-		//TODO control precision here
 		dir = disperse(dir, PI / 6);
 
-		//TODO check how it works
 		x += speed*cos(dir);
 		y -= speed*sin(dir);
 
@@ -71,7 +64,6 @@ void Player::kick()
 		else            xd = gameManager->field->fieldRect->Left;
 
 		speedb = disperse(30, 10);
-		//TODO refactor to reuse
 		bool ownSide = (teamNo == 1 && x < xc) || (teamNo == 2 && x > xc);
 
 		Point p = partner();

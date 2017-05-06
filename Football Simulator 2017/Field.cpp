@@ -115,7 +115,6 @@ bool Field::onRight(int x, int y)
 	return false;
 }
 
-// TODO refactor duplicate code
 bool Field::isGoalLeft(int x, int y)
 {
 	return isOutLeft(x, y) && ((y > (y_c - goalWidth / 2)) && (y < (y_c + goalWidth / 2)));

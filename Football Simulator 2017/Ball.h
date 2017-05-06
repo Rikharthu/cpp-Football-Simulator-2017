@@ -7,11 +7,9 @@ private:
 	int x;
 	int y;
 	int r;
-	// TColor color;
 	int speed;
 	int slowdown;
 	double dir;
-	// TCanvas *aCanvas;
 public:
 	Ball();
 	void setSpeed(int s) { speed = s; }

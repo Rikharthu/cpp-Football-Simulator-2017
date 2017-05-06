@@ -162,13 +162,11 @@
     <ClInclude Include="Forward.h" />
     <ClInclude Include="FullBack.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="GameUIInterface.h" />
     <ClInclude Include="Girl.h" />
     <ClInclude Include="GoalKeeper.h" />
     <ClInclude Include="HalfBack.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Lights.h" />
-    <ClInclude Include="MainView.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>

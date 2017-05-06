@@ -8,7 +8,6 @@
 #include "MainPage.g.h"
 #include "GameManager.h"
 #include "Sound.h"
-#include "MainView.h"
 #include <functional>
 
 namespace Football_Simulator_2017
@@ -47,5 +46,6 @@ namespace Football_Simulator_2017
 		void canvasAnimated_Update(Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedUpdateEventArgs^ args);
 		void ComboBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
 		void girls_enabled_chkbx_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void Comment_TextBlock_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

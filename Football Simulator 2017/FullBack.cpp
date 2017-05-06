@@ -37,15 +37,16 @@ void FullBack::move()
 	gameManager->ball->getCoord(xb, yb);
 	gameManager->field->getCentre(xc, yc);
 
-	energy = energy > 0 ? --energy : 0;
-	speed = 3;// + rand(energy / 1000);
+	energy -= ENERGY_CONSUMPTION;
+	energy = energy > 0 ? energy : 0;
+	speed = 3 + rand() % ((energy / 1000) + 1);
 
 	xd = xb; yd = yb;
 	if (teamNo == 1 && xb > xc) { xd = disperse(xc / 2, xc / 4); yd = random(2 * yc); }
 	if (teamNo == 2 && xb < xc) { xd = disperse(xc + xc / 2, xc / 4);  yd = random(2 * yc); }
 
 	dir = direction(x, y, xd, yd);
-	//dir = disperse(dir, PI/6);
+	dir = disperse(dir, PI/6);
 
 	x += speed*cos(dir);
 	y -= speed*sin(dir);

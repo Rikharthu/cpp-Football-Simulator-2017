@@ -17,7 +17,6 @@ private:
 	int goalWidth;
 	int goalAreaW;
 	int goalAreaH;
-	//TCanvas *aCanvas;
 	CanvasImageBrush ^ net_brush;
 	CanvasCommandList ^ goal_net_cl;
 

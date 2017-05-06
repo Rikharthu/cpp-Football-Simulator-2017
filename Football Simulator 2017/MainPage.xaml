@@ -31,10 +31,11 @@
 
             <StackPanel
                 Margin="10,0,10,0"
-                Orientation="Vertical">
+                Orientation="Vertical" VerticalAlignment="Center">
                 <TextBlock 
+                    Margin="0,5,0,0"
                     Name="Comment_TextBlock"
-                    Text="Goal!"/>
+                    Text="Goal!" FontWeight="Bold" SelectionChanged="Comment_TextBlock_SelectionChanged" FontSize="24"/>
                 <TextBlock 
                     Name="KickInfo_TextBlock"/>
             </StackPanel>

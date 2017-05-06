@@ -5,5 +5,4 @@ class Forward : public Player
 {
 public:
 	Forward(int t, int n);
-	//void kick();
 };

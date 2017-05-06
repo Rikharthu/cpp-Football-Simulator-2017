@@ -194,6 +194,8 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
         case 25:
             {
                 this->Comment_TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(this->Comment_TextBlock))->SelectionChanged += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Comment_TextBlock_SelectionChanged);
             }
             break;
         case 26:

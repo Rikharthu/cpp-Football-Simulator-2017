@@ -12,6 +12,8 @@
 #include <queue>
 #include "Lights.h"
 
+#define ENERGY_CONSUMPTION 5
+
 using namespace std;
 
 using namespace Microsoft::Graphics::Canvas::UI::Xaml;
@@ -46,7 +48,6 @@ public:
 	Lights *lights[2];
 	char last_kick_team = -1;
 	char last_kick_player = -1;
-
 	// params for ui
 	//String^ message;
 	int team1_energy = 0;
@@ -59,23 +60,16 @@ public:
 	bool isLoopSound = false;
 	// sounds sequences that should be played
 	queue<Sound> sound_queue;
-
 	// Configurations
 	bool isGirlsAllowed = false;
 	state gameState = sStop;
-
 	void render();
-
 	void moveAll();
-
 	void calculateEnergy();
-
 	void startGame();
-
 	void position0();
 	void position1();
 	void position2();
-
 	// Calls all the move methods, checks the game state and etc.
 	void tick();
 };

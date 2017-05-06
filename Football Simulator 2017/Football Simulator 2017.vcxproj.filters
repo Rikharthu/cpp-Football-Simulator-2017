@@ -99,9 +99,6 @@
     <ClInclude Include="Drawable.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="MainView.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -136,9 +133,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Spotlight.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameUIInterface.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Lights.h">

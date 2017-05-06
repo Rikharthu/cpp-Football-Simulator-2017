@@ -5,7 +5,6 @@
 
 Referee::Referee()
 {
-	// aCanvas = FG_Frm->FieldImage->Canvas;
 	type = tReferee;
 	color = Colors::Yellow;
 	speed = 0;
