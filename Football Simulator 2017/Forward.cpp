@@ -2,6 +2,7 @@
 #include "Forward.h"
 #include "GameManager.h"
 
+
 Forward::Forward(int t, int n) :Player(t, n)
 {
 	speed = 12;

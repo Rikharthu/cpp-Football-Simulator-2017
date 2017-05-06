@@ -3,6 +3,9 @@
 #include "GameManager.h"
 #include "Utils.h"
 
+
+using namespace Windows::Foundation::Numerics;
+
 FullBack::FullBack(int t, int n) :Player(t, n)
 {
 	speed = 5;
@@ -73,4 +76,6 @@ void FullBack::kick()
 	gameManager->ball->setSpeed(40);
 
 	gameManager->sound_queue.push(Kick1);
+	gameManager->last_kick_player = No;
+	gameManager->last_kick_team = teamNo;
 }

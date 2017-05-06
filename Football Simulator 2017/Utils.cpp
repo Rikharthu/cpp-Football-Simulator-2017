@@ -3,6 +3,9 @@
 #include <cstdlib>
 #include <math.h>
 #include "GameManager.h"
+#include <locale>
+#include <codecvt>
+#include <string>
 
 using namespace Windows::Foundation;
 using namespace Windows::UI;
@@ -81,4 +84,11 @@ void angellipse(CanvasDrawingSession^ clds, int xc, int yc, int r, double a1, do
 	clds->FillGeometry(CanvasGeometry::CreatePolygon(clds, poly), brush);
 
 	delete poly;
+}
+
+Platform::String ^ toPlatformString(string str)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+	std::wstring intermediateForm = converter.from_bytes(str);
+	return ref new Platform::String(intermediateForm.c_str());
 }

@@ -3,8 +3,6 @@
 #include "GameManager.h"
 #include "Utils.h"
 
-extern GameManager * gameManager;
-
 Player::Player(int t, int n)
 {
 	teamNo = t;
@@ -118,6 +116,10 @@ void Player::kick()
 		gameManager->ball->setSpeed(speedb*2);
 
 		gameManager->sound_queue.push(Kick2);
+
+		// register as last kicked player
+		gameManager->last_kick_player = No;
+		gameManager->last_kick_team = teamNo;
 	}
 }
 

@@ -14,6 +14,7 @@
 #include <locale>
 #include <codecvt>
 #include <string>
+#include <sstream>
 
 using namespace Football_Simulator_2017;
 
@@ -229,10 +230,10 @@ void Football_Simulator_2017::MainPage::debug_enabled_chkbx_Click(Platform::Obje
 
 void Football_Simulator_2017::MainPage::log_chat_message(string tag, string message)
 {
-	/*std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-	std::wstring intermediateForm = converter.from_bytes(tag+": "+message);
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+	std::wstring intermediateForm = converter.from_bytes(tag + ": " + message);
 	Platform::String^ retVal = ref new Platform::String(intermediateForm.c_str());
-	log_TextBlock->Text = log_TextBlock->Text+retVal +"\n";*/
+	//log_TextBlock->Text = log_TextBlock->Text+retVal +"\n";
 }
 
 
@@ -257,6 +258,29 @@ void Football_Simulator_2017::MainPage::syncUI()
 
 		Team1Score_TextBlock->Text = gameManager->team1_score.ToString();
 		Team2Score_TextBlock->Text = gameManager->team2_score.ToString();
+
+		// last kick and message
+		char &lt = gameManager->last_kick_team;
+		char &lp = gameManager->last_kick_player;
+		if (lt != -1 && lp != -1) {
+			KickInfo_TextBlock->Text = "Team " + lt.ToString()
+				+ ", Player #" + lp.ToString();
+		}
+		// game comment
+		state & current_state = gameManager->gameState;
+		switch (current_state) {
+		case sGoal:
+			Comment_TextBlock->Text = "Team #"+gameManager->last_kick_team.ToString()+" Scored!";
+			break;
+		case sStop:
+			Comment_TextBlock->Text = "Stopped";
+			break;
+		case sFirstKick:
+		case sRestartGame:
+		case sRunning:
+			Comment_TextBlock->Text = "In Progress";
+			break;
+		}
 
 		element->IsLooping = gameManager->isLoopSound;
 

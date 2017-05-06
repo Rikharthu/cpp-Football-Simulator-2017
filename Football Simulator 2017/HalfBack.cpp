@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "Utils.h"
 
+
 HalfBack::HalfBack(int t, int n) :Player(t, n)
 {
 	speed = 10;
@@ -35,4 +36,7 @@ void HalfBack::kick()
 	gameManager->ball->setSpeed(disperse(kickSpeed, kickSpeed / 2));
 
 	gameManager->sound_queue.push(Kick1);
+
+	gameManager->last_kick_player = No;
+	gameManager->last_kick_team = teamNo;
 }

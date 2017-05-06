@@ -29,25 +29,15 @@
                           FontSize="24"
                           FontFamily="Consolas" />
 
-            <ComboBox HorizontalAlignment="Stretch"
-                      VerticalAlignment="Center"
-                      Width="120"
-                      Header="Speed"
-                      SelectedIndex="3"
-                      HorizontalContentAlignment="Stretch"
-                      SelectionChanged="ComboBox_SelectionChanged"
-                      Margin="20,0,50,0">
-                <TextBlock Text="25%" />
-                <TextBlock Text="50%" />
-                <TextBlock Text="75%" />
-                <TextBlock Text="100%" />
-                <TextBlock Text="125%" />
-                <TextBlock Text="150%" />
-                <TextBlock Text="200%" />
-                <TextBlock Text="300%" />
-                <TextBlock Text="500%" />
-                <TextBlock Text="1000%" />
-            </ComboBox>
+            <StackPanel
+                Margin="10,0,10,0"
+                Orientation="Vertical">
+                <TextBlock 
+                    Name="Comment_TextBlock"
+                    Text="Goal!"/>
+                <TextBlock 
+                    Name="KickInfo_TextBlock"/>
+            </StackPanel>
 
             <Grid x:Name="___No_Name_">
                 <Grid.RowDefinitions>
@@ -242,7 +232,27 @@
                           VerticalAlignment="Top"
                           HorizontalContentAlignment="Left"
                           VerticalContentAlignment="Stretch" />
-            </StackPanel>          
+            </StackPanel>
+
+            <ComboBox HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center"
+                      Width="120"
+                      Header="Speed"
+                      SelectedIndex="3"
+                      HorizontalContentAlignment="Stretch"
+                      SelectionChanged="ComboBox_SelectionChanged"
+                      Margin="20,0,50,0">
+                <TextBlock Text="25%" />
+                <TextBlock Text="50%" />
+                <TextBlock Text="75%" />
+                <TextBlock Text="100%" />
+                <TextBlock Text="125%" />
+                <TextBlock Text="150%" />
+                <TextBlock Text="200%" />
+                <TextBlock Text="300%" />
+                <TextBlock Text="500%" />
+                <TextBlock Text="1000%" />
+            </ComboBox>
         </StackPanel>
         <canvas:CanvasAnimatedControl Name="canvasAnimated"
                                       Grid.Row="1"

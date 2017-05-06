@@ -1,6 +1,8 @@
 #pragma once
 #include "Human.h"
 
+using namespace Windows::Foundation::Numerics;
+
 class Player :public Human
 {
 protected:

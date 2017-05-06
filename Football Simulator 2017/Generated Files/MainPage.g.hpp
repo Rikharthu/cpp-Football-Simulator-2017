@@ -65,14 +65,14 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
             break;
         case 5:
             {
-                ::Windows::UI::Xaml::Controls::ComboBox^ element5 = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(element5))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&MainPage::ComboBox_SelectionChanged);
+                this->___No_Name_ = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
             }
             break;
         case 6:
             {
-                this->___No_Name_ = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                ::Windows::UI::Xaml::Controls::ComboBox^ element6 = safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::ComboBox^>(element6))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&MainPage::ComboBox_SelectionChanged);
             }
             break;
         case 7:
@@ -189,6 +189,16 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
         case 24:
             {
                 this->Team2Energy_ProgressBar = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(__target);
+            }
+            break;
+        case 25:
+            {
+                this->Comment_TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 26:
+            {
+                this->KickInfo_TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
     }

@@ -72,6 +72,8 @@ namespace Football_Simulator_2017
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Team2Score_TextBlock;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ Team1Energy_ProgressBar;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ Team2Energy_ProgressBar;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ Comment_TextBlock;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ KickInfo_TextBlock;
     };
 }
 

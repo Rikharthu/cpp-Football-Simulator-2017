@@ -71,5 +71,7 @@ void GoalKeeper::kick()
 
 		//TODO some lagg happens with this sound, even though during debugging it is confirmed to execute only once
 		gameManager->sound_queue.push(Kick3);
+		gameManager->last_kick_player = No;
+		gameManager->last_kick_team = teamNo;
 	}
 }

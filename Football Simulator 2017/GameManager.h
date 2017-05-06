@@ -44,6 +44,8 @@ public:
 	AssReferee * assRef2;
 	Spotlight * spotlight;
 	Lights *lights[2];
+	char last_kick_team = -1;
+	char last_kick_player = -1;
 
 	// params for ui
 	//String^ message;
