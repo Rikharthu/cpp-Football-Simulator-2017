@@ -351,7 +351,7 @@ void GameManager::tick()
 
 	if (field->isGoalRight(ball_x, ball_y))
 	{
-		team2_score++;
+		team1_score++;
 		gameState = sGoal;
 		ball->moveTo(center_x, center_y);
 		ball->setSpeed(0);
