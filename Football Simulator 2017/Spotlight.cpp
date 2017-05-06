@@ -18,8 +18,7 @@ void Spotlight::draw() {
 	//TODO lazy init for brush
 	CanvasSolidColorBrush^ brush = ref new CanvasSolidColorBrush(gameManager->canvas, Colors::LightGoldenrodYellow);
 	brush->Opacity = 0.2f;
-	CanvasDrawingSession ^ session = gameManager->render_target->CreateDrawingSession();
-	session->FillCircle(x, y, r, brush);
+	gameManager->render_target_session->FillCircle(x, y, r, brush);
 }
 
 void Spotlight::move()

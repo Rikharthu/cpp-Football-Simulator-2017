@@ -44,11 +44,12 @@ void GameManager::init()
 {
 	this->field = new Field();
 	FieldNet * net = new FieldNet();
-
 	net->layer = LAYER_NUMBER_FIELD_NET;
 	drawables.push_back(net);
 
+	// prepare sessions and drawing targets
 	this->render_target = ref new CanvasRenderTarget(this->canvas, this->canvas->Size);
+
 	this->ball = new Ball();
 	ball->layer = LAYER_NUMBER_BALL;
 	drawables.push_back(ball);
@@ -147,17 +148,15 @@ void GameManager::init()
 
 void GameManager::render()
 {
-	CanvasDrawingSession ^ clds = gameManager->render_target->CreateDrawingSession();
-	clds->Clear(Colors::Transparent);
-	delete clds;
-	//TODO add possible layer values to layers (will be used for rendering order)
-	//TODO move recalculations to another method like "recalculateLayersAndDrawables"
+	this->render_target_session = gameManager->render_target->CreateDrawingSession();
+	render_target_session->Clear(Colors::Transparent);
 
 	set<int> layers;
 	for (Drawable* drawable : drawables) {
 		layers.insert(drawable->layer);
 	}
-	// set is automatically ordered
+
+	// set is automatically ordered from min to max, just as we need
 	for (int layer : layers) {
 		// render all Drawables for given layer
 		for (Drawable *drawable : drawables) {
@@ -168,6 +167,7 @@ void GameManager::render()
 			}
 		}
 	}
+	delete render_target_session;
 }
 
 void GameManager::moveAll()
@@ -315,19 +315,12 @@ void GameManager::tick()
 
 	switch (gameState) {
 	case sGoal:
-		//::Sleep(1000);
-		//Todo refactor into enum
-		//message = "Goal!";
-		//sound("whistle.wav", SND_SYNC);
-		//sound("mencheer.wav", SND_SYNC);
 		sound_queue.push(Whistle);
 		sound_queue.push(Mencheer);
 		if (isGirlsAllowed) {
 			gameState = sPause;
-			//TODO implement
 			lights[0]->on = lights[1]->on = true;
 			isLoopSound = true;
-			//	sound("successtada.wav", SND_ASYNC | SND_LOOP);
 			sound_queue.push(SuccessTada);
 		}
 		else {
@@ -336,10 +329,10 @@ void GameManager::tick()
 		return;
 	case sRestartGame:
 		isLoopSound = false;
+		// No need for delay
 		//::Sleep(1000);
 		//for (int i = 0; i<5; ++i) girl[i]->moveTo(xc - 2 * 6 + i * 6, 4);
 		lights[0]->on = lights[1]->on = false;
-		//sound("whistle.wav", SND_SYNC);
 		sound_queue.push(Whistle);
 		gameState = sFirstKick;
 		return;
@@ -365,12 +358,8 @@ void GameManager::tick()
 		position2();
 		return;
 	}
-
-	//TODO delete when implemented
-	//::Sleep(500 - 50 * TrackBar->Position);  //slows down action
-
+	
 	moveAll();
 
-	//TODO delete from MainPage's syncUI()
 	calculateEnergy();
 }

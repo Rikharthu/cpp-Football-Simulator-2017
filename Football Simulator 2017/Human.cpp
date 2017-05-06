@@ -13,9 +13,7 @@ Human::Human()
 
 void Human::draw()
 {
-	CanvasDrawingSession ^ clds = gameManager->render_target->CreateDrawingSession();
-	clds->FillCircle(x, y, r, color);
-	delete clds;
+	gameManager->render_target_session->FillCircle(x, y, r, color);
 }
 
 void Human::moveTo(int xTo, int yTo)

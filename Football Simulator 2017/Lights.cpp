@@ -55,10 +55,8 @@ void Lights::draw()
 
 			CanvasSolidColorBrush^ brush = ref new CanvasSolidColorBrush(gameManager->canvas, Colors::YellowGreen);
 			brush->Opacity = 0.7f;
-			CanvasDrawingSession^  clds = gameManager->render_target->CreateDrawingSession();
-			clds->FillGeometry(CanvasGeometry::CreatePolygon(clds, poly), brush);
-			angellipse(clds, xspot, yspot, spotLength / 2, 0, 2 * PI, dir, spotWidth*1.0 / spotLength);
-			delete clds;
+			gameManager->render_target_session->FillGeometry(CanvasGeometry::CreatePolygon(gameManager->render_target_session, poly), brush);
+			angellipse(gameManager->render_target_session, xspot, yspot, spotLength / 2, 0, 2 * PI, dir, spotWidth*1.0 / spotLength);
 		}
 		else {
 			// Old Implementation
@@ -69,13 +67,12 @@ void Lights::draw()
 			int xspot = x + dist*cos(dir);
 			int yspot = y - dist*sin(dir);
 
+			//TODO persist brush
 			CanvasSolidColorBrush^ brush = ref new CanvasSolidColorBrush(gameManager->canvas, Colors::YellowGreen);
 			brush->Opacity = 0.7f;
-			CanvasDrawingSession ^ session = gameManager->render_target->CreateDrawingSession();
-			session->FillCircle(xspot, yspot, 100, brush);
+			gameManager->render_target_session->FillCircle(xspot, yspot, 100, brush);
 
 			// no need, but still
-			delete session;
 			delete brush;
 		}
 	}

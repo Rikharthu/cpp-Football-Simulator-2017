@@ -102,13 +102,6 @@ void Football_Simulator_2017::MainPage::playSound(Sound sound)
 // DRAWING
 void Football_Simulator_2017::MainPage::canvas_DrawAnimated(Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedDrawEventArgs^ args)
 {
-	//gameManager->ball->moveTo(random(600), random(600));
-	int x, y;
-	gameManager->ball->getCoord(x, y);
-	if (gameManager->field->isGoalLeft(x, y)) {
-		playSound(Sound::SuccessTada);
-	}
-	//gameManager->moveAll();
 	gameManager->render();
 	syncUI();
 	// static content (field is pre-drawn on this command list)

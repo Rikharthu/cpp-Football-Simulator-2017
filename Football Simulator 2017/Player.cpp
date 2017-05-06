@@ -19,23 +19,7 @@ Player::Player(int t, int n)
 void Player::draw()
 {
 	Human::draw();
-	CanvasDrawingSession ^ session = gameManager->render_target->CreateDrawingSession();
-	//TODO or draw right inside ?
-	session->DrawText(No.ToString(), x, y - r, Colors::Black);
-	delete session;
-
-	//TODO implement
-	/*switch (sound) {
-	case 0: break;
-	case 1: FG_Frm->sound("kick1.wav", SND_ASYNC); break;
-	case 2: FG_Frm->sound("kick2.wav", SND_ASYNC); break;
-	case 3: FG_Frm->sound("kick3.wav", SND_ASYNC); break;
-	};
-	if (sound) {
-		FG_Frm->CommentText->Caption = "Team " + IntToStr(teamNo) +
-			", No. " + IntToStr(No);
-	}*/
-	sound = 0;
+	gameManager->render_target_session->DrawText(No.ToString(), x, y - r, Colors::Black);
 }
 
 void Player::move()

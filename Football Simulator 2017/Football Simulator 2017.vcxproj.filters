@@ -37,9 +37,6 @@
     <ClCompile Include="Ball.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Human.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Sources\Humans</Filter>
     </ClCompile>
@@ -78,6 +75,9 @@
     </ClCompile>
     <ClCompile Include="Lights.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Human.cpp">
+      <Filter>Sources\Humans</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

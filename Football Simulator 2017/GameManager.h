@@ -28,12 +28,12 @@ public:
 	CanvasAnimatedControl ^ canvas;
 	// Command list where we will draw our field
 	CanvasCommandList ^ field_cl;
-
+	// A bitmap we will draw dynamic content on to
+	CanvasRenderTarget ^ render_target;
+	CanvasDrawingSession ^ render_target_session;
 	// Game objects
 	Field * field;
 	Ball * ball;
-	// A bitmap we will draw dynamic content on to
-	CanvasRenderTarget ^ render_target;
 	// Contains all the object that are going to be drawn for batch-rendering
 	list<Drawable*> drawables;
 	vector<Player*> team1;
