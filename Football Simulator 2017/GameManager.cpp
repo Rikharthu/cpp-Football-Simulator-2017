@@ -320,8 +320,8 @@ void GameManager::tick()
 		if (isGirlsAllowed) {
 			gameState = sPause;
 			lights[0]->on = lights[1]->on = true;
-			isLoopSound = true;
 			sound_queue.push(SuccessTada);
+			isLoopSound = true;
 		}
 		else {
 			gameState = sRestartGame;

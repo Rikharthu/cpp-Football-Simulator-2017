@@ -132,7 +132,7 @@ void Football_Simulator_2017::MainPage::canvas_CreateResources(Microsoft::Graphi
 // for testing
 void Football_Simulator_2017::MainPage::canvas_PointerPressed(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
 {
-#ifdef _DEBUG
+//#ifdef _DEBUG
 	int x = e->GetCurrentPoint(canvasAnimated)->Position.X;
 	int y = e->GetCurrentPoint(canvasAnimated)->Position.Y;
 	bool isInside = gameManager->field->isInside(x, y);
@@ -147,7 +147,7 @@ void Football_Simulator_2017::MainPage::canvas_PointerPressed(Platform::Object^ 
 	if (isDebugEnabled) {
 		gameManager->ball->moveTo(x, y);
 	}
-#endif // _DEBUG
+//#endif // _DEBUG
 }
 
 void Football_Simulator_2017::MainPage::startStopBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
