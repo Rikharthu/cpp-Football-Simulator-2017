@@ -363,3 +363,20 @@ void GameManager::tick()
 
 	calculateEnergy();
 }
+
+void GameManager::addEnergy(int team_number, int energy)
+{
+	if (team_number == 1) {
+		for (Player * p : team1) {
+			p->setEnergy(p->getEnergy() + energy);
+		}
+	}
+	else if (team_number == 2) {
+		for (Player * p : team2) {
+			p->setEnergy(p->getEnergy() + energy);
+		}
+	}
+	else {
+		throw exception("no such team number");
+	}
+}

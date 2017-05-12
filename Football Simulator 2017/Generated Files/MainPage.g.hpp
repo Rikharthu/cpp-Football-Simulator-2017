@@ -193,12 +193,26 @@ void ::Football_Simulator_2017::MainPage::Connect(int __connectionId, ::Platform
             break;
         case 25:
             {
+                ::Windows::UI::Xaml::Controls::Button^ element25 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element25))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::onAddEnergyButtonClicked);
+            }
+            break;
+        case 26:
+            {
+                ::Windows::UI::Xaml::Controls::Button^ element26 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element26))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::onAddEnergyButtonClicked);
+            }
+            break;
+        case 27:
+            {
                 this->Comment_TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(this->Comment_TextBlock))->SelectionChanged += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Football_Simulator_2017::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Comment_TextBlock_SelectionChanged);
             }
             break;
-        case 26:
+        case 28:
             {
                 this->KickInfo_TextBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }

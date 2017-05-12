@@ -367,3 +367,10 @@ void Football_Simulator_2017::MainPage::Comment_TextBlock_SelectionChanged(Platf
 {
 
 }
+
+
+void Football_Simulator_2017::MainPage::onAddEnergyButtonClicked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	int team_number = safe_cast<int32>(static_cast<Button^>(sender)->Tag);
+	gameManager->addEnergy(team_number, 200);
+}

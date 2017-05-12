@@ -72,6 +72,7 @@ public:
 	void position2();
 	// Calls all the move methods, checks the game state and etc.
 	void tick();
+	void addEnergy(int team_number, int energy);
 };
 
 extern GameManager * gameManager;
